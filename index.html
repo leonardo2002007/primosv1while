@@ -1,1 +1,64 @@
-
+<!DOCTYPE html>
+<! -Não esqueça de colocar o nome, número e turma dos integrantes do grupo.
+Nome: Leonardo Lima Da Silva nº: 16  turma: 3ºJ
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primos V1 while</title>
+    <script>
+        function recebenumero() {
+            var canvas = document.getElementById('meuCanvas');
+            if (canvas.getContext) {
+                var cntxt = canvas.getContext('2d');
+                var maxWidth = 300;
+                var lineHeight = 35;
+                var x = (canvas.width - maxWidth) / 2;
+                var y = 60;
+                var grad = cntxt.createLinearGradient(0, 0, canvas.width, 0);
+                grad.addColorStop(0, "rgb(255, 0, 0)");
+                grad.addColorStop(0.5, "rgb(255, 255, 255)");
+                grad.addColorStop(1,"rgb(0, 0, 0)");
+                var N1 = parseInt(document.getElementById("Numero1").value, 10);
+                cntxt.fillStyle = "rgb(255, 255, 255)";
+                cntxt.fillRect = (0, 0, canvas.width, canvas.height);
+                cntxt.font="30px Comic Sans MS";
+                cntxt.fillStyle = grad;
+                primo(cntxt, N1, x, y);
+            }
+        }
+        function primo(cntxt, N1, x, y) {
+            let contador = 3;
+            let line = N1 + " ";
+            console.log("O numero digitado foi " + line);
+            let resposta = "é primo!";
+            console.log("O valor dentro da resposta é " + resposta);
+            if(parseInt(N1) < 2 || (parseInt(N1)%2 == 0 && parseInt(N1) != 2)){
+                resposta = "não é primo!";
+            }
+            else{
+                console.log("Raiz do Numero é: " + Math.sqrt(parseInt(N1)));
+                while(contador <= Math.sqrt(parseInt(N1))){
+                    if(parseInt(N1)%contador == 0){
+                        resposta = "não é primo!"
+                        break;
+                    }
+                    contador += 2;
+                }
+            }
+            line = line + resposta;
+            cntxt.fillText(line, x, y);
+            cntxt.strokeText(line, x, y);
+            document.getElementById("Numero1").value = "";
+            document.getElementById("Numero1").focus();
+        }
+    </script>
+</head>
+<body>
+    <h1>Primos</h1>
+    <label style="font-size: 20px;">Numero1</label>
+    <input type="text" id="Numero1" autofocus><br>
+    <button onclick="recebeNumero()">Primo?</button><br><br>
+    <canvas id="meuCanvas" width="400" height="400" style="border: 1px solid #000000; background-color: white;"></canvas>
+</body>
+</html>
